@@ -1,20 +1,10 @@
-# 흔적 / TRACES — i18n MVP
+# 흔적 / TRACES — i18n MVP (Full Replace Pack)
 
-한국어/영어가 한 페이지에서 섞이지 않도록 **로케일 라우팅**으로 분리했습니다.
+이 ZIP은 **프로젝트 전체를 한 번에 교체**해서,
+- /ko, /en 라우팅
+- 상단 우측 KO | EN 유지
+- 상단 우측 DAY / NIGHT 테마 토글 추가
+를 **즉시 동작**하게 만드는 최소 구성입니다.
 
-## URL
-- /ko, /ko/write, /ko/about, /ko/guide
-- /en, /en/write, /en/about, /en/guide
-
-## 실행 (로컬)
-Node.js 18+
-
-```bash
-npm install
-npm run dev
-```
-
-http://localhost:3000 로 접속하면 자동으로 /ko 또는 /en 으로 이동합니다.
-
-## 언어 전환
-상단 우측의 KO | EN 버튼으로 **현재 페이지 경로를 유지한 채** 전체 언어를 전환합니다.
+## 배포(초보자용)
+- GitHub Desktop으로 레포를 클론한 뒤, 폴더 내용을 이 ZIP 내용으로 "덮어쓰기" → Commit → Push

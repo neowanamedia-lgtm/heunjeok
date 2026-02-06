@@ -1,11 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
-import { LOCALES } from "@/lib/i18n";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+const LOCALES = ["ko", "en"] as const;
 
 function detectLocale(req: NextRequest) {
-  const al = req.headers.get("accept-language") || "";
-  const lowered = al.toLowerCase();
-  if (lowered.startsWith("en") || lowered.includes(",en")) return "en";
-  return "ko";
+  const accept = req.headers.get("accept-language") || "";
+  if (accept.toLowerCase().includes("ko")) return "ko";
+  return "en";
 }
 
 export function middleware(req: NextRequest) {
@@ -15,15 +16,18 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const hasLocale = LOCALES.some((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`));
-  if (hasLocale) return NextResponse.next();
+  if (LOCALES.some((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`))) {
+    return NextResponse.next();
+  }
 
-  const locale = detectLocale(req);
-  const url = req.nextUrl.clone();
-  url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
-  return NextResponse.redirect(url);
+  if (pathname === "/") {
+    const locale = detectLocale(req);
+    const url = req.nextUrl.clone();
+    url.pathname = `/${locale}`;
+    return NextResponse.redirect(url);
+  }
+
+  return NextResponse.next();
 }
 
-export const config = {
-  matcher: ["/((?!_next|api|.*\\..*).*)"]
-};
+export const config = { matcher: ["/((?!_next|api|.*\..*).*)"] };
