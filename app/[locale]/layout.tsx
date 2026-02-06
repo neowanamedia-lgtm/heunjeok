@@ -1,3 +1,5 @@
+"use client";
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import { isLocale, t, type Locale } from "@/lib/i18n";
