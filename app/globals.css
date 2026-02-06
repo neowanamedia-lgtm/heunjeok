@@ -3,3 +3,4 @@
 @tailwind utilities;
 
 :root { color-scheme: light; }
+@import "../styles/theme.css";
