@@ -1,3 +1,5 @@
+import ThemeSwitch from "@/components/ThemeSwitch";
+
 "use client";
 
 import { usePathname } from "next/navigation";
@@ -18,6 +20,8 @@ export function LanguageSwitcher({ locale }: { locale: Locale }) {
   const pathname = usePathname() || `/${locale}`;
   const koHref = swapLocale(pathname, "ko");
   const enHref = swapLocale(pathname, "en");
+
+  <ThemeSwitch />
 
   return (
     <div className="text-sm text-neutral-600 flex items-center gap-2">
